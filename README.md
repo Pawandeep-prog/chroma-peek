@@ -33,6 +33,11 @@ Follow these steps to get started:
    streamlit run chroma-peek/main.py
    ```
 
+## Samples
+
+![HomePage](./images/homepage.png)
+![Query DB](./images/query.png)
+
 ## 📚 More Information
 
 Stay tuned! More information and updates are on the way. Feel free to contribute and enhance the Chroma-Peek experience. Happy peeking! 👁️🔍
