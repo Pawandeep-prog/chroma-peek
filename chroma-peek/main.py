@@ -47,11 +47,26 @@ if not(path==""):
                  )
         
     with col2:
-        data = client.get_collection(collection_selected).get()
+        collection = client.get_collection(collection_selected)
+        data = collection.get()
         df = pd.DataFrame(data)
 
         st.markdown(f"<b>Data in </b>*{collection_selected}*", unsafe_allow_html=True)
-        st.dataframe(df, use_container_width=True)
+        st.dataframe(df, use_container_width=True, height=300)
         
+    st.divider()
+    query = st.text_input("Enter Query to get 3 similar texts", placeholder="get 3 similar texts")
+    if query:
+        result = collection.query(query_texts=[query], n_results=min(3, len(data)))
+        result_df = {}
+        for key, value in result.items():
+            if value:
+                result_df[key] = value[0]
+            else:
+                result_df[key] = value
+        result_df = pd.DataFrame(result_df)
+        st.dataframe(result_df, use_container_width=True)
 
+else:
+    st.subheader("Enter Valid Full Persist Path")
         
