@@ -2,32 +2,25 @@ import streamlit as st
 import chromadb
 import pandas as pd
 
-## styles ##
-st.markdown(
-    """
-    <style>
-    /* Set the width of the columns */
-    .custom-columns {
-        display: flex;
-        width: 100%;
-    }
-    
-    .custom-column-1 {
-        flex: 20;
-        padding: 10px;
-    }
-    
-    .custom-column-2 {
-        flex: 80;
-        padding: 10px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-##     ##
+st.set_page_config(page_title="chroma-peek", page_icon="👀")
 
-st.title("chromaDB Viewer")
+## styles ##
+padding = 100
+st.markdown(""" <style>
+            #MainMenu {
+                visibility: hidden;
+            }
+            footer {
+                visibility: hidden;
+            }
+
+            
+            </style> """, 
+            
+            unsafe_allow_html=True)
+############
+
+st.title("Chroma Peek 👀")
 
 # get uri of the persist directory
 path = ""
@@ -54,15 +47,11 @@ if not(path==""):
                  )
         
     with col2:
-        print(collection_selected)
         data = client.get_collection(collection_selected).get()
         df = pd.DataFrame(data)
 
-        st.caption("showing data")
+        st.markdown(f"<b>Data in </b>*{collection_selected}*", unsafe_allow_html=True)
         st.dataframe(df, use_container_width=True)
         
-
-
-
 
         
